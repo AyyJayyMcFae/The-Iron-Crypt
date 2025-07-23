@@ -40,31 +40,8 @@
 }
 
 /* Use the first slide's background as blurred sides */
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 20vw; /* width of blurred side bars */
-  height: 100%;
-  background-image: url('https://media.discordapp.net/attachments/727019063691313253/1397443802352062645/viVr0Yh.png?ex=6881be75&is=68806cf5&hm=614268af775a2904aebe78cf0a1db447d9560ef55dea7297af734375dadc7644&=&format=webp&quality=lossless&width=2063&height=1160');
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: blur(40px);
-  transform: scale(1.1); /* zoom slightly for blur edges */
-  z-index: 0;
-  pointer-events: none;
-}
 
-.hero::before {
-  left: 0;
-  background-position: left center;
-}
 
-.hero::after {
-  right: 0;
-  background-position: right center;
-}
 
 /* Make sure hero slides appear above the blurred sides */
 .hero-slide {
