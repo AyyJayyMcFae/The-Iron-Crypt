@@ -16,9 +16,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
 
-  <!-- Favicon -->
-  <link rel="icon" href="Images/logo.png" type="image/png">
-
   <style>
     /* General styles and layout */
     body { margin: 0; font-family: 'Roboto', sans-serif; line-height: 1.6; color: #ddd;background-color: #151515; }
@@ -40,8 +37,31 @@
 }
 
 /* Use the first slide's background as blurred sides */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 20vw; /* width of blurred side bars */
+  height: 100%;
+  background-image: url('https://media.discordapp.net/attachments/727019063691313253/1397443802352062645/viVr0Yh.png?ex=6881be75&is=68806cf5&hm=614268af775a2904aebe78cf0a1db447d9560ef55dea7297af734375dadc7644&=&format=webp&quality=lossless&width=2063&height=1160');
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(40px);
+  transform: scale(1.1); /* zoom slightly for blur edges */
+  z-index: 0;
+  pointer-events: none;
+}
 
+.hero::before {
+  left: 0;
+  background-position: left center;
+}
 
+.hero::after {
+  right: 0;
+  background-position: right center;
+}
 
 /* Make sure hero slides appear above the blurred sides */
 .hero-slide {
@@ -264,7 +284,7 @@
 
 <!-- Header with logo and navigation -->
 <header>
-  <h1><a href=""><img src="Images/logo.png" alt="Scoops"></a></h1>
+  <h1><a href=""><img src="https://github.com/AyyJayyMcFae/The-Iron-Crypt/blob/main/Images/logo.png?raw=true" alt="Scoops"></a></h1>
   <nav>
     <a href="#about">About</a>
     <a href="#services">Photos</a>
@@ -274,7 +294,7 @@
 
 <!-- Hero section with rotating slides -->
 <section class="hero">
-  <div class="hero-slide active" style="background-image: url('Images/heroReel.png');">
+  <div class="hero-slide active" style="background-image: url('https://media.discordapp.net/attachments/727019063691313253/1397443802352062645/viVr0Yh.png?ex=6881be75&is=68806cf5&hm=614268af775a2904aebe78cf0a1db447d9560ef55dea7297af734375dadc7644&=&format=webp&quality=lossless&width=2063&height=1160');">
     <div class="hero-content">
       <h2>Welcome to The Iron Crypt</h2>
       <a href="#" class="btn open-join-modal">Join Now</a>
