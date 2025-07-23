@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Iron Crypt</title>
+  
+  <meta name="description" content="Iron Crypt Gym — First and only goth gym in Corpus Christi.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'Roboto', sans-serif; line-height: 1.6; color: #ddd;background-color: #151515; }
+    header { display: flex; justify-content: space-between; align-items: center; background: #222222; color: #fff; padding: 20px 40px; }
+    header h1 { margin: 0; font-family: 'Pacifico', cursive; font-size: 2rem; }
+    nav a { color: #b8b7c2; margin-left: 20px; text-decoration: none; transition: color 0.3s ease; }
+    nav a:hover { color: #fff; }
+
+    .hero {
+  position: relative;
+  height: 500px; /* adjust as needed */
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slide::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.hero-slide .hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide h2 {
+  text-shadow: 2px 2px 4px #000;
+  font-family: "Pirata One", cursive;
+  font-size: 3rem;
+}
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #00000044;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 20px;
+    }
+    .hero h2{
+  text-shadow: 2px 2px 4px #000;
+  font-family: "Pirata One", cursive;
+  font-size: 3rem;
+}
+
+    .btn { background: #edecf9; color: #333; padding: 12px 20px; text-decoration: none; border-radius: 4px; transition: background 0.3s ease; }
+    .btn:hover { background: #b8b7c2; }
+
+   section {
+  padding: 40px 5%;
+  max-width: 1400px; /* allow it to grow a bit */
+  margin: auto;
+}
+
+    section h2 { font-size: 2rem; margin-bottom: 20px; text-align: center; }
+
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+    }
+    .slide {
+      position: relative;
+      flex: 0 0 auto;
+      width: 300px;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      scroll-snap-align: center;
+    }
+    .slide::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.068);
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .slide-content {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .hours {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      font-family: special elite;
+    }
+
+     p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+    #contact form { display: grid; gap: 15px; max-width: 100%; }
+    #contact input, #contact textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
+    }
+    #contact button {
+      background: #171718;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #contact button:hover { background: #3f3f3f; }
+
+    #contact .map {
+      width: 100%;
+      height: 300px;
+    }
+    #events {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+#events .event {
+  background: #1c1c1c;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #edecf9; /* Or your accent color */
+  border-radius: 4px;
+}
+
+#events h3 {
+  font-family: 'Special Elite';
+  margin-top: 0;
+}
+
+    footer { background: #222222; color: #fff; text-align: center; padding: 20px; }
+    footer a { color: #fff; margin: 0 5px; text-decoration: underline; }
+     header h1 img {
+        height: 60px;
+        width: auto;
+        display: block;
+        max-width: 100%;
+      }
+      header a {
+        font-family: "Special Elite";
+      }
+   
+
+    @media (max-width: 800px) {
+      #contact { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 800px) {
+      nav {
+        text-align: center;
+        width: 100%;
+      }
+      nav a {
+        display: inline-block;
+        margin: 10px;
+      }
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+    }
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+.modal .close {
+  position: absolute;
+  top: 20px; right: 40px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1><a href=""><img src="https://media.discordapp.net/attachments/727019063691313253/1396603001275158688/crypt_logo.png?ex=687eaf67&is=687d5de7&hm=cb76e339900365b17f8f9735649eb2e93a4e666d3c9ce02e71e1129dc97658aa&=&format=webp&quality=lossless&width=960&height=960" alt="Scoops"></a></h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Photos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-slide active" style="background-image: url('https://scontent-dfw5-1.xx.fbcdn.net/v/t51.82787-15/518146933_17884336182336240_9216041124384871840_n.webp?stp=dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=j9ZG4ZAUumMQ7kNvwHp8nmS&_nc_oc=AdkoGzSR5zjSpgifHdvMI1hkBM3w7lDra8DkqjP9_eDlOrWFhXk4x2fdh8Xy5BVh5RY&_nc_zt=23&_nc_ht=scontent-dfw5-1.xx&_nc_gid=lrbc2imEbWLSZ8CE3I5cHw&oh=00_AfS2QelUQs9r7XPIIzYT5f2_EdMfzELNBPF3uE161UzaNA&oe=68837943');">
+    <div class="hero-content">
+      <h2>Welcome to The Iron Crypt</h2>
+      <a href="#contact" class="btn">Join Now</a>
+    </div>
+  </div>
+
+  <div class="hero-slide" style="background-image: url('https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/518287463_122139383576695687_7607257236708819082_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=dzxlZgCsBV4Q7kNvwGswQTw&_nc_oc=AdmD99zrAV80QojotIyWdIJXiAHrPXUHzYyPjQNfgFAMbeV4ENNyQyUJBaLcNJTNoJg&_nc_zt=23&_nc_ht=scontent-dfw5-1.xx&_nc_gid=q_XBe9-uMfDz4oPxXkiiIA&oh=00_AfSyjRIzzNGTsjfU5pZZ29u_4ftpTCKNwVI4qcdc1SPEHQ&oe=6883A392'); background-position: center 5%;">
+    <div class="hero-content">
+      <h2>Strongman Saturdays</h2>
+      <a href="#contact" class="btn">Join Now</a>
+    </div>
+  </div>
+   <div class="hero-slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516639396_17883969939336240_3169108524561108120_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=dlOR-J0lq7kQ7kNvwEaPlTD&_nc_oc=AdknkxO_KBtyVa2ggX-wsV6Yrvhwo3mQb7ElR2tudevXlIHMnC3r2nA387MvJ1oXM8w&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=6JMApV8NOhBz6X8AaV2UMw&oh=00_AfQyRNYjcLUGh0ohfqtkjwxeccqrPMfPV9lfUuvJMOhKsQ&oe=6883923A'); background-position: center 20%;">
+    <div class="hero-content">
+      <h2>Kate Herman Photoshoot</h2>
+      <a href="#contact" class="btn">Join Now</a>
+    </div>
+  </div>
+</section>
+
+
+<section id="about">
+  <h2 style="font-family:'Special Elite';">𝕿𝖗𝖆𝖎𝖓 𝖙𝖔 𝖙𝖍𝖊 𝕲𝖗𝖆𝖛𝖊 💪🏼🪦</h2>
+  <p>We are the only horror gym in Texas and the only gym with strongman equipment in Corpus Christi! Family owned, 🇲🇽🏳️‍🌈 owned</p>
+  <p class="hours">Hours: Mon–Sun: Open All Day</p>
+</section>
+
+<section id="services">
+  <h2 style="font-family:'Special Elite';">Featured Shots</h2>
+  <div class="carousel">
+    <div class="slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516559613_17883969957336240_7000351714380487198_n.webp?stp=dst-jpg_tt6&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=4xIILT77bT8Q7kNvwFfQFn7&_nc_oc=Adk9yobI4lWFD0SauLQj0wouCu2B-jobRcEI_X1QtkJH7BZEkwf0PZdQi2DlbDCuS2U&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=Ed-hCnzuLCC2lqyTECLuLQ&oh=00_AfSotVf1_us3cUNQj_5QD0-HA2x7smdOjqbPs7KjGcwq5g&oe=68833114');" data-full="https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516559613_17883969957336240_7000351714380487198_n.webp?stp=dst-jpg_tt6&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=4xIILT77bT8Q7kNvwFfQFn7&_nc_oc=Adk9yobI4lWFD0SauLQj0wouCu2B-jobRcEI_X1QtkJH7BZEkwf0PZdQi2DlbDCuS2U&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=Ed-hCnzuLCC2lqyTECLuLQ&oh=00_AfSotVf1_us3cUNQj_5QD0-HA2x7smdOjqbPs7KjGcwq5g&oe=68833114">
+      <div class="slide-content">
+        <h3>Baillie</h3>
+        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('https://scontent-dfw5-3.xx.fbcdn.net/v/t51.82787-15/517778109_17883969915336240_5464312338927875567_n.webp?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=iNyZjcpvgmoQ7kNvwHOwiFp&_nc_oc=AdlG5TFI0xUxM25-UWjTnNpQiaAu9KGGl_1cRkjSotAJvZCYOHf9Uh1YBE9-pKT9Jj4&_nc_zt=23&_nc_ht=scontent-dfw5-3.xx&_nc_gid=SrOVLePTmRK9lH2C53oMCA&oh=00_AfRTjTAbZx-mvbemogKq9A3XDFw-xSYLZr23rdXX-6Nl_g&oe=688332EB');" data-full="https://scontent-dfw5-3.xx.fbcdn.net/v/t51.82787-15/517778109_17883969915336240_5464312338927875567_n.webp?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=iNyZjcpvgmoQ7kNvwHOwiFp&_nc_oc=AdlG5TFI0xUxM25-UWjTnNpQiaAu9KGGl_1cRkjSotAJvZCYOHf9Uh1YBE9-pKT9Jj4&_nc_zt=23&_nc_ht=scontent-dfw5-3.xx&_nc_gid=SrOVLePTmRK9lH2C53oMCA&oh=00_AfRTjTAbZx-mvbemogKq9A3XDFw-xSYLZr23rdXX-6Nl_g&oe=688332EB">
+      <div class="slide-content">
+        <h3>David</h3>
+        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/517429013_17883969879336240_6892013527658934645_n.webp?stp=dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YSRZDLml4aIQ7kNvwH_CJE7&_nc_oc=AdmS9zGebsXnV6iNTZFg1C0FyFWn-bhqwARWNGHRE9w9gxICtfSyAx09me75MJukJF0&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=WmXut41pzMYC0lC530gI7w&oh=00_AfStSpdbr9r5YiFJa54E1hY36XXqebgq5xbVJFTn_GhZog&oe=68833E04');" data-full="https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/517429013_17883969879336240_6892013527658934645_n.webp?stp=dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YSRZDLml4aIQ7kNvwH_CJE7&_nc_oc=AdmS9zGebsXnV6iNTZFg1C0FyFWn-bhqwARWNGHRE9w9gxICtfSyAx09me75MJukJF0&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=WmXut41pzMYC0lC530gI7w&oh=00_AfStSpdbr9r5YiFJa54E1hY36XXqebgq5xbVJFTn_GhZog&oe=68833E04">
+      <div class="slide-content">
+        <h3>Will</h3>
+        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+      </div>
+      
+    </div>
+    <div class="slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/515832791_17883969906336240_3644009421997721792_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=XJkYdqXEonQQ7kNvwEHAZRy&_nc_oc=AdlLPW6wHz3UIgfBOLdta1DHoY8HPs_TFPUwduhFjIsByiz8whNAzg1K56hpwiEq108&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=4uP68Ri80cSVHWRMmTmi0Q&oh=00_AfQFg-5qVt3XfUdlaPeaPmKuBqaPNu6NW-1tNHw6PC6c6Q&oe=68833446');" data-full="https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/515832791_17883969906336240_3644009421997721792_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=XJkYdqXEonQQ7kNvwEHAZRy&_nc_oc=AdlLPW6wHz3UIgfBOLdta1DHoY8HPs_TFPUwduhFjIsByiz8whNAzg1K56hpwiEq108&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=4uP68Ri80cSVHWRMmTmi0Q&oh=00_AfQFg-5qVt3XfUdlaPeaPmKuBqaPNu6NW-1tNHw6PC6c6Q&oe=68833446">
+      <div class="slide-content">
+        <h3>Lillith</h3>
+        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+      </div>
+  </div>
+</section>
+
+<!-- Elfsight Google Reviews | Untitled Google Reviews -->
+<section id="reviews">
+  <h2 style="font-family:'Special Elite';">What Our Members Say</h2>
+  <div class="elfsight-app-2808d1cd-3ec6-4b95-a5fe-c693e4def196"></div>
+
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+
+</section>
+
+<section id="events">
+  <h2 style="font-family:'Special Elite'; text-align:center;">Upcoming Events & Announcements</h2>
+  <div class="event">
+    <h3>🧛 Midnight Deadlift Party</h3>
+    <p><strong>Date:</strong> August 12, 2025</p>
+    <p>Test your limits under the neon lights. Prizes for heaviest lift and best costume.</p>
+  </div>
+  <div class="event">
+    <h3>🎃 Spooky Strongman Saturday</h3>
+    <p><strong>Date:</strong> October 26, 2025</p>
+    <p>Annual Halloween competition — lift heavy things in your scariest get-up.</p>
+  </div>
+</section>
+
+
+<section id="contact">
+  <div>
+    <h2 style="font-family:'Special Elite';">Contact Us</h2>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p>Phone: <a href="tel:2108807707">210-880-7707</a></p>
+    <p>Email: <a href="mailto:ironcryptgym@gmail.com">ironcryptgym@gmail.com</a></p>
+    <p>Find us at: 6062 Holly Rd B1, Corpus Christi</p>
+  </div>
+  <div>
+    <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.7576579781435!2d-97.36860588817444!3d27.693884076091027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8668f5f237a61d2f%3A0x189e624a2d9c3f30!2sThe%20Iron%20Crypt!5e0!3m2!1sen!2sus!4v1753047686591!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+<div id="image-modal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modal-img">
+</div>
+<footer>
+  <p>Follow us: <a href="https://www.facebook.com/profile.php?id=61570870616013"><i class="fa-brands fa-facebook-f"></i></i></a> | <a href="
+https://www.instagram.com/theironcryptgym/"><i class="fa-brands fa-instagram"></i></a></p>
+  <p><a href="#">Privacy Policy</a></p>
+  <p>&copy; 2025 Iron Crypt Gym. All rights reserved.</p>
+</footer>
+
+<script>
+  const modal = document.getElementById("image-modal");
+  const modalImg = document.getElementById("modal-img");
+  const closeBtn = modal.querySelector(".close");
+
+  document.querySelectorAll(".slide").forEach(slide => {
+    slide.addEventListener("click", () => {
+      const fullImg = slide.getAttribute("data-full");
+      modal.style.display = "flex";
+      modalImg.src = fullImg;
+    });
+  });
+
+  closeBtn.onclick = () => {
+    modal.style.display = "none";
+    modalImg.src = "";
+  };
+
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      modalImg.src = "";
+    }
+  };
+  const slides = document.querySelectorAll('.hero-slide');
+let current = 0;
+setInterval(() => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}, 15000);
+
+</script>
+
+</body>
+</html>
