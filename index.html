@@ -92,10 +92,9 @@
     }
 
     /* Button styles */
-    .btn { background: #edecf9; color: #333; padding: 12px 20px; text-decoration: none; border-radius: 4px; transition: background 0.3s ease; }
+    .btn { background: #171718; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 4px; transition: background 0.3s ease; font-family: "Special Elite"; font-size: 1.2rem;}
     .btn:hover { background: #b8b7c2; }
-    .btn .open-join-modal {
-      background: #171718;
+    .btn .btn.open-join-modal {
       color: #fff;
       font-family: 'Special Elite', cursive;
       font-size: 1.2rem;
@@ -201,9 +200,10 @@
       margin-bottom: 20px;
       text-align: center;
     }
+   
 
     /* Contact section styles */
-    #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+     #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
     #contact form { display: grid; gap: 15px; max-width: 100%; }
     #contact input, #contact textarea {
       padding: 10px;
@@ -271,6 +271,10 @@
       flex-direction: column;
       align-items: center;
     }
+    .hero {
+      height: 50vh; /* Adjust height for smaller screens */
+    }
+    #contact { grid-template-columns: 1fr; }
   } /* <-- Close the media query here */
 
     /* Modal overlay styles */
@@ -331,7 +335,7 @@
   <div class="hero-slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516639396_17883969939336240_3169108524561108120_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=dlOR-J0lq7kQ7kNvwEaPlTD&_nc_oc=AdknkxO_KBtyVa2ggX-wsV6Yrvhwo3mQb7ElR2tudevXlIHMnC3r2nA387MvJ1oXM8w&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=6JMApV8NOhBz6X8AaV2UMw&oh=00_AfQyRNYjcLUGh0ohfqtkjwxeccqrPMfPV9lfUuvJMOhKsQ&oe=6883923A'); background-position: center 20%;">
     <div class="hero-content">
       <h2>Kate Herman Photoshoot</h2>
-      <a href="https://katehermanphotography.com/" class="btn" target="_blank" rel="noopener">Visit Photographer</a>
+      <a href="https://www.facebook.com/photo.php?fbid=122138292278695687&set=pb.61570870616013.-2207520000&type=3" class="btn" target="_blank" rel="noopener">See Full Set</a>
     </div>
   </div>
 </section>
