@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
 
 <!-- Favicon -->
-  <link rel="icon" href="Images/logo.png" type="image/png">
+  <link rel="icon" href="https://github.com/AyyJayyMcFae/The-Iron-Crypt/blob/main/Images/logo.png?raw=true" type="image/png">
 
   <style>
     /* General styles and layout */
@@ -28,45 +28,17 @@
     nav a:hover { color: #fff; }
 
     /* Hero section styles */
-    /* Blurred sides effect on hero */
 .hero {
   position: relative;
   height: 82vh; /* your existing height */
-  width: 100vw;
+  width: auto;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Use the first slide's background as blurred sides */
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 20vw; /* width of blurred side bars */
-  height: 100%;
-  background-image: url('https://media.discordapp.net/attachments/727019063691313253/1397443802352062645/viVr0Yh.png?ex=6881be75&is=68806cf5&hm=614268af775a2904aebe78cf0a1db447d9560ef55dea7297af734375dadc7644&=&format=webp&quality=lossless&width=2063&height=1160');
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: blur(40px);
-  transform: scale(1.1); /* zoom slightly for blur edges */
-  z-index: 0;
-  pointer-events: none;
-}
 
-.hero::before {
-  left: 0;
-  background-position: left center;
-}
-
-.hero::after {
-  right: 0;
-  background-position: right center;
-}
-
-/* Make sure hero slides appear above the blurred sides */
 .hero-slide {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -82,12 +54,14 @@
   opacity: 0;
   transition: opacity 1s ease-in-out;
   padding-bottom: 25vh; /* adjust to taste */
+  pointer-events: none; /* Prevent all slides from capturing clicks by default */
 }
 
 
 /* Show the active slide */
 .hero-slide.active {
   opacity: 1;
+  pointer-events: auto; /* Only the active slide can capture clicks */
 }
 
     .hero-content {
@@ -126,6 +100,36 @@
       font-family: 'Special Elite', cursive;
       font-size: 1.2rem;
     }
+     .hero-blur {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      z-index: 0;
+      overflow: hidden;
+      filter: blur(30px) brightness(0.3);
+    }
+    .hero-blur .hero-slide {
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .hero-blur .hero-slide.active { opacity: 1; }
+    .hero {
+      position: relative;
+      height: 82vh;
+      z-index: 1;
+    }
+    .hero-slide {
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
 
     /* Section styles */
     section {
@@ -136,12 +140,22 @@
     section h2 { font-size: 2rem; margin-bottom: 20px; text-align: center; }
 
     /* Carousel styles */
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 20px;
-    }
+.carousel {
+  display: flex;
+  justify-content: center; /* <-- Add this */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
     .slide {
       position: relative;
       flex: 0 0 auto;
@@ -245,28 +259,19 @@
 
     /* Responsive styles */
     @media (max-width: 800px) {
-      #contact { grid-template-columns: 1fr; }
+  nav {
+    text-align: center;
+    width: 100%;
+  }
+  nav a {
+    display: inline-block;
+    margin: 10px;
+  }
+    header {
+      flex-direction: column;
+      align-items: center;
     }
-    @media (max-width: 800px) {
-      nav {
-        text-align: center;
-        width: 100%;
-      }
-      nav a {
-        display: inline-block;
-        margin: 10px;
-      }
-      header {
-        flex-direction: column;
-        align-items: center;
-      }
-      @media (max-width: 800px) {
-      /* On small screens, use fixed hero height if needed */
-      .hero {
-        height: 50vh;
-      }
-    }
-    }
+  } /* <-- Close the media query here */
 
     /* Modal overlay styles */
     .modal {
@@ -290,6 +295,10 @@
       font-size: 40px;
       cursor: pointer;
     }
+
+
+
+
   </style>
 </head>
 <body>
@@ -305,29 +314,29 @@
 </header>
 
 <!-- Hero section with rotating slides -->
+
 <section class="hero">
   <div class="hero-slide active" style="background-image: url('https://media.discordapp.net/attachments/727019063691313253/1397443802352062645/viVr0Yh.png?ex=6881be75&is=68806cf5&hm=614268af775a2904aebe78cf0a1db447d9560ef55dea7297af734375dadc7644&=&format=webp&quality=lossless&width=2063&height=1160');">
     <div class="hero-content">
       <h2>Welcome to The Iron Crypt</h2>
-      <a href="#" class="btn open-join-modal">Join Now</a>
-
+      <a href="#" class="btn open-join-modal" style="font-family:Special Elite; font-weight: 200;">Join Us</a>
     </div>
   </div>
   <div class="hero-slide" style="background-image: url('https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/518287463_122139383576695687_7607257236708819082_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=dzxlZgCsBV4Q7kNvwGswQTw&_nc_oc=AdmD99zrAV80QojotIyWdIJXiAHrPXUHzYyPjQNfgFAMbeV4ENNyQyUJBaLcNJTNoJg&_nc_zt=23&_nc_ht=scontent-dfw5-1.xx&_nc_gid=q_XBe9-uMfDz4oPxXkiiIA&oh=00_AfSyjRIzzNGTsjfU5pZZ29u_4ftpTCKNwVI4qcdc1SPEHQ&oe=6883A392'); background-position: center 5%;">
     <div class="hero-content">
       <h2>Strongman Saturdays</h2>
       <a href="#" class="btn open-join-modal">Join Now</a>
-
     </div>
   </div>
   <div class="hero-slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516639396_17883969939336240_3169108524561108120_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=dlOR-J0lq7kQ7kNvwEaPlTD&_nc_oc=AdknkxO_KBtyVa2ggX-wsV6Yrvhwo3mQb7ElR2tudevXlIHMnC3r2nA387MvJ1oXM8w&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=6JMApV8NOhBz6X8AaV2UMw&oh=00_AfQyRNYjcLUGh0ohfqtkjwxeccqrPMfPV9lfUuvJMOhKsQ&oe=6883923A'); background-position: center 20%;">
     <div class="hero-content">
       <h2>Kate Herman Photoshoot</h2>
-      <a href="#" class="btn open-join-modal">Join Now</a>
-
+      <a href="https://katehermanphotography.com/" class="btn" target="_blank" rel="noopener">Visit Photographer</a>
     </div>
   </div>
 </section>
+
+
 
 <!-- About section -->
 <section id="about">
@@ -344,25 +353,25 @@
     <div class="slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516559613_17883969957336240_7000351714380487198_n.webp?stp=dst-jpg_tt6&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=4xIILT77bT8Q7kNvwFfQFn7&_nc_oc=Adk9yobI4lWFD0SauLQj0wouCu2B-jobRcEI_X1QtkJH7BZEkwf0PZdQi2DlbDCuS2U&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=Ed-hCnzuLCC2lqyTECLuLQ&oh=00_AfSotVf1_us3cUNQj_5QD0-HA2x7smdOjqbPs7KjGcwq5g&oe=68833114');" data-full="https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/516559613_17883969957336240_7000351714380487198_n.webp?stp=dst-jpg_tt6&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=4xIILT77bT8Q7kNvwFfQFn7&_nc_oc=Adk9yobI4lWFD0SauLQj0wouCu2B-jobRcEI_X1QtkJH7BZEkwf0PZdQi2DlbDCuS2U&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=Ed-hCnzuLCC2lqyTECLuLQ&oh=00_AfSotVf1_us3cUNQj_5QD0-HA2x7smdOjqbPs7KjGcwq5g&oe=68833114">
       <div class="slide-content">
         <h3>Baillie</h3>
-        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+        <p>Captured by@Katehermanphotography during our 11am Strongman Saturday Slot</p>
       </div>
     </div>
     <div class="slide" style="background-image: url('https://scontent-dfw5-3.xx.fbcdn.net/v/t51.82787-15/517778109_17883969915336240_5464312338927875567_n.webp?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=iNyZjcpvgmoQ7kNvwHOwiFp&_nc_oc=AdlG5TFI0xUxM25-UWjTnNpQiaAu9KGGl_1cRkjSotAJvZCYOHf9Uh1YBE9-pKT9Jj4&_nc_zt=23&_nc_ht=scontent-dfw5-3.xx&_nc_gid=SrOVLePTmRK9lH2C53oMCA&oh=00_AfRTjTAbZx-mvbemogKq9A3XDFw-xSYLZr23rdXX-6Nl_g&oe=688332EB');" data-full="https://scontent-dfw5-3.xx.fbcdn.net/v/t51.82787-15/517778109_17883969915336240_5464312338927875567_n.webp?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=iNyZjcpvgmoQ7kNvwHOwiFp&_nc_oc=AdlG5TFI0xUxM25-UWjTnNpQiaAu9KGGl_1cRkjSotAJvZCYOHf9Uh1YBE9-pKT9Jj4&_nc_zt=23&_nc_ht=scontent-dfw5-3.xx&_nc_gid=SrOVLePTmRK9lH2C53oMCA&oh=00_AfRTjTAbZx-mvbemogKq9A3XDFw-xSYLZr23rdXX-6Nl_g&oe=688332EB">
       <div class="slide-content">
         <h3>David</h3>
-        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+        <p>Captured by@Katehermanphotography during our 11am Strongman Saturday Slot</p>
       </div>
     </div>
     <div class="slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/517429013_17883969879336240_6892013527658934645_n.webp?stp=dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YSRZDLml4aIQ7kNvwH_CJE7&_nc_oc=AdmS9zGebsXnV6iNTZFg1C0FyFWn-bhqwARWNGHRE9w9gxICtfSyAx09me75MJukJF0&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=WmXut41pzMYC0lC530gI7w&oh=00_AfStSpdbr9r5YiFJa54E1hY36XXqebgq5xbVJFTn_GhZog&oe=68833E04');" data-full="https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/517429013_17883969879336240_6892013527658934645_n.webp?stp=dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YSRZDLml4aIQ7kNvwH_CJE7&_nc_oc=AdmS9zGebsXnV6iNTZFg1C0FyFWn-bhqwARWNGHRE9w9gxICtfSyAx09me75MJukJF0&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=WmXut41pzMYC0lC530gI7w&oh=00_AfStSpdbr9r5YiFJa54E1hY36XXqebgq5xbVJFTn_GhZog&oe=68833E04">
       <div class="slide-content">
         <h3>Will</h3>
-        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+        <p>Captured by@Katehermanphotography during our 11am Strongman Saturday Slot</p>
       </div>
     </div>
     <div class="slide" style="background-image: url('https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/515832791_17883969906336240_3644009421997721792_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=XJkYdqXEonQQ7kNvwEHAZRy&_nc_oc=AdlLPW6wHz3UIgfBOLdta1DHoY8HPs_TFPUwduhFjIsByiz8whNAzg1K56hpwiEq108&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=4uP68Ri80cSVHWRMmTmi0Q&oh=00_AfQFg-5qVt3XfUdlaPeaPmKuBqaPNu6NW-1tNHw6PC6c6Q&oe=68833446');" data-full="https://scontent-dfw5-2.xx.fbcdn.net/v/t51.82787-15/515832791_17883969906336240_3644009421997721792_n.webp?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=XJkYdqXEonQQ7kNvwEHAZRy&_nc_oc=AdlLPW6wHz3UIgfBOLdta1DHoY8HPs_TFPUwduhFjIsByiz8whNAzg1K56hpwiEq108&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=4uP68Ri80cSVHWRMmTmi0Q&oh=00_AfQFg-5qVt3XfUdlaPeaPmKuBqaPNu6NW-1tNHw6PC6c6Q&oe=68833446">
       <div class="slide-content">
         <h3>Lillith</h3>
-        <p>Captured by@Katehermanphotography during our 11am Stongman Saturday Slot</p>
+        <p>Captured by@Katehermanphotography during our 11am Strongman Saturday Slot</p>
       </div>
   </div>
 </section>
@@ -463,6 +472,9 @@
   // Hero section carousel auto-rotation
   const slides = document.querySelectorAll('.hero-slide');
   let current = 0;
+
+  
+
   setInterval(() => {
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
@@ -471,17 +483,17 @@
 
   // Modal for "Join Now" button
   const joinModal = document.getElementById("join-modal");
-  const openJoinBtn = document.getElementById("open-join-modal");
+  
   const closeBtns = document.querySelectorAll(".modal .close");
   const openJoinBtns = document.querySelectorAll(".open-join-modal");
 
   // Open join modal when button is clicked
   openJoinBtns.forEach(btn => {
-    btn.onclick = (e) => {
-      e.preventDefault();
-      joinModal.style.display = "flex";
-    };
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    joinModal.style.display = "flex";
   });
+});
 
   // Close join modal
   closeBtns.forEach(btn => {
@@ -496,6 +508,9 @@
       joinModal.style.display = "none";
     }
   };
+
+
+
 </script>
 
 
