@@ -173,7 +173,28 @@
     text-align: center;
 }
 
-
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  z-index: 1;
+  filter: invert(1); /* Invert color for white arrow */
+}
+.arrow.right {
+  right: 0;
+  background-image: url('https://www.onlygfx.com/wp-content/uploads/2017/09/grunge-arrow-2-15.png');
+}
+.arrow.left {
+  left: 0;
+  background-image: url('https://www.onlygfx.com/wp-content/uploads/2017/09/grunge-arrow-2-15.png');
+  transform: translateY(-50%) scaleX(-1); /* Flip horizontally */
+}
   </style>
 </head>
 <body>
@@ -287,7 +308,9 @@
 <!-- Modal for viewing gallery images -->
 <div id="image-modal" class="modal">
   <span class="close">&times;</span>
+  <span class="arrow left">&#8592;</span>
   <img class="modal-content" id="modal-img">
+  <span class="arrow right">&#8594;</span>
 </div>
 
 <script>
@@ -295,13 +318,51 @@
   const modal = document.getElementById("image-modal");
   const modalImg = document.getElementById("modal-img");
   const closeBtn = modal.querySelector(".close");
+  const leftArrow = modal.querySelector(".arrow.left");
+  const rightArrow = modal.querySelector(".arrow.right");
+
+  const galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+  let currentIndex = 0;
 
   // Open modal when a gallery image is clicked
-  document.querySelectorAll(".gallery-item img").forEach(img => {
+  galleryImages.forEach((img, idx) => {
     img.addEventListener("click", () => {
+      currentIndex = idx;
+      showImage();
       modal.style.display = "flex";
-      modalImg.src = img.src;
     });
+  });
+
+  function showImage() {
+    modalImg.src = galleryImages[currentIndex].getAttribute("data-full") || galleryImages[currentIndex].src;
+  }
+
+  // Arrow navigation
+  leftArrow.onclick = (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    showImage();
+  };
+  rightArrow.onclick = (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    showImage();
+  };
+
+  // Swipe support for mobile
+  let startX = null;
+  modalImg.addEventListener("touchstart", function(e) {
+    startX = e.touches[0].clientX;
+  });
+  modalImg.addEventListener("touchend", function(e) {
+    if (startX === null) return;
+    let endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) { // swipe right
+      leftArrow.onclick(e);
+    } else if (startX - endX > 50) { // swipe left
+      rightArrow.onclick(e);
+    }
+    startX = null;
   });
 
   // Close modal when close button is clicked
